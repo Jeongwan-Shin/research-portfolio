@@ -10,7 +10,7 @@ if(player){
   document.querySelector('#scene-title').textContent=s[1];document.querySelector('#scene-description').textContent=s[3];
   document.querySelector('#video-download').href=`scene-${id}.mp4`;
   buttons.forEach(b=>{const active=Number(b.dataset.scene)===n;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
-  history.replaceState(null,'',`#scene-${id}`);status.textContent='재생 버튼으로 영상을 재생할 수 있습니다.';
+  history.replaceState(null,'',`${location.pathname}${location.search}#scene-${id}`);status.textContent='재생 버튼으로 영상을 재생할 수 있습니다.';
   if(play)player.play().catch(()=>{status.textContent='플레이어의 재생 버튼을 눌러 주세요.';});
  }
  buttons.forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.scene),true)));
@@ -21,6 +21,6 @@ if(player){
  document.querySelector('#fullscreen').addEventListener('click',async()=>{try{if(player.requestFullscreen)await player.requestFullscreen();else if(player.webkitEnterFullscreen)player.webkitEnterFullscreen();else status.textContent='플레이어의 전체 화면 버튼을 이용해 주세요.';}catch{status.textContent='플레이어의 전체 화면 버튼을 이용해 주세요.';}});
  player.addEventListener('error',()=>{status.textContent='영상을 불러오지 못했습니다. 다운로드 링크를 이용하거나 다시 시도해 주세요.';});
  player.addEventListener('playing',()=>{status.textContent='재생 중 · 다른 장면을 선택하면 영상이 전환됩니다.';});
- const match=location.hash.match(/^#scene-0([1-8])$/);if(match)choose(Number(match[1]));
+ const match=location.hash.match(/^#scene-0([1-8])$/);if(match){choose(Number(match[1]));document.querySelector('#videos')?.scrollIntoView();}
  const videoNav=document.querySelector('nav a[href="qualitative.html"]');if(videoNav)videoNav.setAttribute('aria-current','page');
 }
