@@ -22,5 +22,5 @@ if(player){
  player.addEventListener('error',()=>{status.textContent='영상을 불러오지 못했습니다. 다운로드 링크를 이용하거나 다시 시도해 주세요.';});
  player.addEventListener('playing',()=>{status.textContent='재생 중 · 다른 장면을 선택하면 영상이 전환됩니다.';});
  const match=location.hash.match(/^#scene-0([1-8])$/);if(match)choose(Number(match[1]));
- document.querySelector('nav a[href="qualitative.html"]').setAttribute('aria-current','page');
+ const videoNav=document.querySelector('nav a[href="qualitative.html"]');if(videoNav)videoNav.setAttribute('aria-current','page');
 }
